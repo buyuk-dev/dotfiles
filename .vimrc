@@ -6,10 +6,12 @@
 "
 
 colorscheme slate
+let TABWIDTH = 4
+let MAXLINEWIDTH = 100
 
 set nowrap
-set tabstop=4
-set shiftwidth=4
+set tabstop=TABWIDTH
+set shiftwidth=TABWIDTH
 set number
 set cursorline
 set hlsearch
@@ -27,21 +29,29 @@ highlight Folded ctermbg=darkgrey ctermfg=white
 highlight EolWhitespace ctermbg=red guibg=red
 highlight EolTabs ctermbg=red guibg=red
 
-
 let g:highlightMarks_cterm_colors = [23]
-map <F9> :NERDTreeToggle<CR>
 
 
 if (index(source_code_extensions, extension) >= 0 || filename =~# '\.\w\+')
-    set colorcolumn=100
-    set foldmethod=syntax
+    set colorcolumn = MAXLINEWIDTH
+    set foldmethod = syntax
     syntax on
 
     match EolWhitespace /\s\+$/
     match EolTabs /\t/
 endif
 
+function! SetTwoColumnView()                                                                        
+    vsplit                                                                                          
+    exe "normal 2\<C-W>w\<C-F>"                                                                     
+    windo setlocal scrollbind                                                                       
+endfunction
 
+function! RegenerateTags()
+    exe ":!ctags -R ."
+endfunction
 
 map <F8> :set number! <CR>
-
+map <F9> :NERDTreeToggle<CR>
+map <F10> :call  SetTwoColumnView() <CR>
+map <F11> :call RegenerateTags() <CR>
