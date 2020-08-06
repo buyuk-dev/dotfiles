@@ -3,20 +3,34 @@
 " https://github.com/Tumbler/highlightMarks
 " https://github.com/bogado/file-line
 " https://github.com/scrooloose/nerdtree.git
+" https://github.com/xavierd/clang_complete
+"   Run:
+"       CXX="/home/mmichalski/.vim/pack/vendor/start/clang_complete/bin/cc_args.py g++" cmake ..
+"       make
+"   in order to generate .clang_complete file from cmake prooject.
 "
+" https://github.com/ervandew/supertab.git
+"
+
+scriptencoding utf-8
+set encoding=utf-8
 
 colorscheme slate
 let TABWIDTH = 4
 let MAXLINEWIDTH = 100
 
 set nowrap
-set tabstop=TABWIDTH
-set shiftwidth=TABWIDTH
+let &l:tabstop = TABWIDTH
+let &l:shiftwidth = TABWIDTH
 set number
 set cursorline
 set hlsearch
 set nofixendofline
 set expandtab
+
+" set clang_library_path to the libclang file, the directory setting seems to be broken.
+let g:clang_library_path='/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
+set shortmess+=c
 
 let filename = expand('%:t')
 let extension = expand('%:e')
@@ -33,8 +47,8 @@ let g:highlightMarks_cterm_colors = [23]
 
 
 if (index(source_code_extensions, extension) >= 0 || filename =~# '\.\w\+')
-    set colorcolumn = MAXLINEWIDTH
-    set foldmethod = syntax
+    set foldmethod=syntax
+    let &l:colorcolumn = MAXLINEWIDTH
     syntax on
 
     match EolWhitespace /\s\+$/
