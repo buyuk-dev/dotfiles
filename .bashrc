@@ -115,3 +115,9 @@ prev-branch() {
 lsnames() {
     lsd $@ | awk 'NF >= 3 {print $(NF)}'
 }
+
+
+# https://github.com/junegunn/fzf
+# configure fzf fuzzy-search for shell  (use by <Ctrl-T>
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
