@@ -28,6 +28,10 @@ set hlsearch
 set nofixendofline
 set expandtab
 
+" :find foo<TAB> finds all files recursively
+set wildmenu
+set path+=**
+
 " set clang_library_path to the libclang file, the directory setting seems to be broken.
 let g:clang_library_path='/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
 set shortmess+=c
