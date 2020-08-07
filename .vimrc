@@ -1,5 +1,5 @@
 " plugins list
-"
+" -------------------
 " https://github.com/Tumbler/highlightMarks
 " https://github.com/bogado/file-line
 " https://github.com/scrooloose/nerdtree.git
@@ -10,6 +10,12 @@
 "   in order to generate .clang_complete file from cmake prooject.
 "
 " https://github.com/ervandew/supertab.git
+"
+
+" cheatsheet
+" -------------------
+" <Ctrl-v> {select lines} <Shift-I> // <ESC><ESC>                 comment code block
+" <Ctrl-v> {select two first columns of commented lines} <x>      uncomment
 "
 
 scriptencoding utf-8
@@ -73,3 +79,8 @@ map <F8> :set number! <CR>
 map <F9> :NERDTreeToggle<CR>
 map <F10> :call  SetTwoColumnView() <CR>
 map <F11> :call RegenerateTags() <CR>
+
+
+" example of mapping a snippet file into normal mode command
+nnoremap ,for :-1read $HOME/.vim/snippets/forloop.cpp.in<CR>/X<CR>
+
