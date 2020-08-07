@@ -18,6 +18,12 @@
 " <Ctrl-v> {select two first columns of commented lines} <x>      uncomment
 "
 
+" other stuff
+" -------------------
+" on ubuntu copy to clipboard (requires sudo apt install vim-gnome)
+"    "+yy - copy to secondary clipboard (ctrl + v)
+"    "*yy - copy to primary clipboard (middle mouse btn)
+
 scriptencoding utf-8
 set encoding=utf-8
 
