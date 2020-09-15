@@ -12,6 +12,7 @@
 "   in order to generate .clang_complete file from cmake prooject.
 "
 " https://github.com/ervandew/supertab.git
+" https://github.com/tpope/vim-fugitive.git
 "
 
 " cheatsheet
