@@ -4,6 +4,8 @@
 " https://github.com/bogado/file-line
 " https://github.com/scrooloose/nerdtree.git
 " https://github.com/xavierd/clang_complete
+" https://github.com/yegappan/taglist
+"
 "   Run:
 "       CXX="/home/mmichalski/.vim/pack/vendor/start/clang_complete/bin/cc_args.py g++" cmake ..
 "       make
@@ -85,6 +87,7 @@ map <F8> :set number! <CR>
 map <F9> :NERDTreeToggle<CR>
 map <F10> :call  SetTwoColumnView() <CR>
 map <F11> :call RegenerateTags() <CR>
+map <F7> :TlistToggle<CR>
 
 
 " example of mapping a snippet file into normal mode command
