@@ -31,13 +31,12 @@ scriptencoding utf-8
 set encoding=utf-8
 
 colorscheme slate
-let TABWIDTH = 4
-let MAXLINEWIDTH = 100
 
 set nowrap
-let &l:tabstop = TABWIDTH
-let &l:shiftwidth = TABWIDTH
+let &l:tabstop=4
+let &l:shiftwidth=4
 set number
+"set relativenumber
 set cursorline
 set hlsearch
 set nofixendofline
@@ -59,15 +58,15 @@ let source_code_extensions = [
 \]
 
 highlight Folded ctermbg=darkgrey ctermfg=white
-highlight EolWhitespace ctermbg=red guibg=red
 highlight EolTabs ctermbg=red guibg=red
+highlight EolWhitespace ctermbg=red guibg=red
 
 let g:highlightMarks_cterm_colors = [23]
 
 
 if (index(source_code_extensions, extension) >= 0 || filename =~# '\.\w\+')
     set foldmethod=syntax
-    let &l:colorcolumn = MAXLINEWIDTH
+    let &l:colorcolumn=100
     syntax on
 
     match EolWhitespace /\s\+$/
@@ -84,13 +83,15 @@ function! RegenerateTags()
     exe ":!ctags -R ."
 endfunction
 
+" example of mapping a snippet file into normal mode command
+nnoremap ,for :-1read $HOME/.vim/snippets/forloop.cpp.in<CR>/X<CR>
+nnoremap :todo :120vs ~/.todo<CR>
+
+" custom key mappings
+map <F3> :todo <CR>
+map <F5> :!sh -xc "xdotool search --onlyvisible --class Chrome windowfocus key ctrl+r"<CR>
+map <F7> :TlistToggle<CR>
 map <F8> :set number! <CR>
 map <F9> :NERDTreeToggle<CR>
 map <F10> :call  SetTwoColumnView() <CR>
 map <F11> :call RegenerateTags() <CR>
-map <F7> :TlistToggle<CR>
-
-
-" example of mapping a snippet file into normal mode command
-nnoremap ,for :-1read $HOME/.vim/snippets/forloop.cpp.in<CR>/X<CR>
-
