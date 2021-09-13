@@ -5,6 +5,7 @@
 " https://github.com/scrooloose/nerdtree.git
 " https://github.com/xavierd/clang_complete
 " https://github.com/yegappan/taglist
+" https://github.com/buyuk-dev/openai-codex-cli
 "
 "   Run:
 "       CXX="/home/mmichalski/.vim/pack/vendor/start/clang_complete/bin/cc_args.py g++" cmake ..
@@ -27,20 +28,28 @@
 "    "+yy - copy to secondary clipboard (ctrl + v)
 "    "*yy - copy to primary clipboard (middle mouse btn)
 
+
 scriptencoding utf-8
 set encoding=utf-8
 
 colorscheme slate
 
 set nowrap
-let &l:tabstop=4
-let &l:shiftwidth=4
+"let &l:tabstop=4
+"let &l:shiftwidth=4
+set tabstop=4
+set shiftwidth=4
 set number
 "set relativenumber
 set cursorline
 set hlsearch
 set nofixendofline
 set expandtab
+set backspace=indent,eol,start
+
+" For scrolling with mouse on macos
+set mouse=nicr
+
 
 " :find foo<TAB> finds all files recursively
 set wildmenu
@@ -73,15 +82,23 @@ if (index(source_code_extensions, extension) >= 0 || filename =~# '\.\w\+')
     match EolTabs /\t/
 endif
 
-function! SetTwoColumnView()                                                                        
-    vsplit                                                                                          
-    exe "normal 2\<C-W>w\<C-F>"                                                                     
-    windo setlocal scrollbind                                                                       
+function! SetTwoColumnView()
+    vsplit
+    exe "normal 2\<C-W>w\<C-F>"
+    windo setlocal scrollbind
 endfunction
 
 function! RegenerateTags()
     exe ":!ctags -R ."
 endfunction
+
+
+function! CopyMatchAll(searchPattern)
+    normal qaq
+    exe ":g/" . a:searchPattern . "/y A"
+    let @+ = @a
+endfunction
+
 
 " example of mapping a snippet file into normal mode command
 nnoremap ,for :-1read $HOME/.vim/snippets/forloop.cpp.in<CR>/X<CR>
@@ -95,3 +112,4 @@ map <F8> :set number! <CR>
 map <F9> :NERDTreeToggle<CR>
 map <F10> :call  SetTwoColumnView() <CR>
 map <F11> :call RegenerateTags() <CR>
+map <C-@> :GenerateCodexCompletion <CR>

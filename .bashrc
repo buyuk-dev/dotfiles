@@ -1,5 +1,8 @@
-fortune | cowsay;
+## MacOS prerequisits
+# brew install coreutils
 
+
+fortune | cowsay;
 
 # If not running interactively, don't do anything                                                                                                                                                                                                                                                                 
 case $- in
@@ -63,14 +66,26 @@ if [ -f ~/.sdb/.sdb-completion.bash ]; then
 fi
 
 if [ "$RUNNING_SYSTEM" = "macosx" ]; then
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
     echo "setting macosx preferences"
-    alias ls="gls --color=auto"
+    alias ls="ls --color=auto"
     alias lsd="ls --color=always --group-directories-first"
+
+    # This has to be executed only once per system configuration.
+    # The following command makes windows resizing much smoother.
+    # defaults write -g NSWindowResizeTime -float 0.003
+
 else
     echo "setting linux preferences"
     alias ls="ls --color=auto"
     alias lsd="ls --color=always --group-directories-first"
 fi
+
+if [ "$RUNNING_SYSTEM" = "macosx" ]; then
+    alias grep=ggrep
+fi
+
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias nextbr='git checkout $(next-branch)'
