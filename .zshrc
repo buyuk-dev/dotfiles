@@ -113,11 +113,9 @@ lsnames() {
     lsd $@ | awk 'NF >= 3 {print $(NF)}'
 }
 
+# Load secret config  (API keys, etc...)
+[ -f ~/.secrets ] && source ~/.secrets
 
 # https://github.com/junegunn/fzf
 # configure fzf fuzzy-search for shell  (use by <Ctrl-T>
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-
-# Load secret config  (API keys, etc...)
-[ -f ~/.secrets ] && source ~/.secrets
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
